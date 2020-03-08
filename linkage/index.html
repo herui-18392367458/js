@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+        .search {
+            width: 500px;
+            height: 50px;
+            border: 1px solid red;
+            display: flex;
+            align-items: center;
+        }
+
+        .province,
+        .city,
+        .area {
+            width: 100px;
+        }
+
+        .adress {
+            margin-top: 10px;
+            width: 500px;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <div>所在地:</div>
+        <select name="" class="province" id="province">
+            <option value="">----请选择----</option>
+        </select>
+        <select name="" class="city" id="city">
+            <option value="">----请选择----</option>
+        </select>
+        <select name="" class="area" id="area">
+            <option value="">----请选择----</option>
+        </select>
+        <button id="btn">搜索</button>
+    </div>
+    <div class="adress" id="adress">
+    </div>
+    <div id="ele">
+        <div class="Pagination"></div>
+    </div>
+    <script>
+        var provinceList = [],
+            cityList = [],
+            areaList = []
+        //请求大数据的方法
+        function getList(){
+            return $.ajax({
+                type: "get",
+                url: "./city.json",
+                dataType: "json",
+                success: function (data) {
+                    return provinceList.push(...data.data)
+                }
+            })
+        }
+        //页面dom渲染完毕以后执行
+        $(async function(){
+              let result=await getList()
+              console.log(result.data)
+              result.data.forEach(item=>{
+                $("#province").append(`<option value=${item.id}>${item.province}</option>`)
+                $("#province").change(function () {
+                    if ($("#province").val() === item.id) {
+                        $("#adress").children().remove()
+                        $("#city").children().not(':eq(0)').remove()
+                        $("#area").children().not(':eq(0)').remove()
+                        item.children1.forEach(itemCity => {
+                            $("#city").append(`<option value=${itemCity.id}>${itemCity.city}</option>`)
+                            $("#city").change(function () {
+                                if ($("#city").val() === itemCity.id) {
+                                    $("#adress").children().remove()
+                                    $("#area").children().not(':eq(0)').remove()
+                                    itemCity.children2.forEach(itemArea => {
+                                        $("#area").append(`<option value=${itemArea.id}>${itemArea.area}</option>`)
+                                        $("#area").change(function () {
+                                            if ($("#area").val() === itemArea.id) {
+                                                $("#adress").children().remove()
+                                                itemArea.list.forEach(itemAdress => {
+                                                    $("#adress")
+                                                    .append(
+                                                        `<div>
+                                                            <div>${itemAdress.name}</div>
+                                                            <div>${itemAdress.adress}</div>
+                                                        </div>`)
+                                                })
+                                            }
+                                        })
+                                    })
+                                }
+                            })
+                        })
+                    }
+                })
+              })
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+        // $.ajax({
+        //     type: "get",
+        //     url: "./city.json",
+        //     dataType: "json",
+        //     success: function (data) {
+        //         return provinceList.push(...data.data)
+        //     }
+        // }).then(res => {
+        //     res.data.forEach(item => {
+        //         console.log(item)
+        //         $("#province").append(`<option value=${item.id}>${item.province}</option>`)
+        //         $("#province").change(function () {
+        //             if ($("#province").val() === item.id) {
+        //                 $("#adress").children().remove()
+        //                 $("#city").children().not(':eq(0)').remove()
+        //                 $("#area").children().not(':eq(0)').remove()
+        //                 item.children1.forEach(itemCity => {
+        //                     $("#city").append(`<option value=${itemCity.id}>${itemCity.city}</option>`)
+        //                     $("#city").change(function () {
+        //                         if ($("#city").val() === itemCity.id) {
+        //                             $("#adress").children().remove()
+        //                             $("#area").children().not(':eq(0)').remove()
+        //                             itemCity.children2.forEach(itemArea => {
+        //                                 $("#area").append(`<option value=${itemArea.id}>${itemArea.area}</option>`)
+        //                                 $("#area").change(function () {
+        //                                     if ($("#area").val() === itemArea.id) {
+        //                                         $("#adress").children().remove()
+        //                                         itemArea.list.forEach(itemAdress => {
+        //                                             $("#adress")
+        //                                             .append(
+        //                                                 `<div>
+        //                                                     <div>${itemAdress.name}</div>
+        //                                                     <div>${itemAdress.adress}</div>
+        //                                                 </div>`)
+        //                                         })
+        //                                     }
+        //                                 })
+        //                             })
+        //                         }
+        //                     })
+        //                 })
+        //             }
+        //         })
+        //     });
+        // })
+    </script>
+</body>
+
+</html>
