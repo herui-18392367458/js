@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab切换</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        #box,
+        #box1 {
+            width: 600px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            border: 10px solid #000;
+            margin: 30px auto;
+        }
+
+        ul {
+            width: 100%;
+            height: 60px;
+            display: flex;
+        }
+
+        ul>li {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: pink;
+            color: #fff;
+            font-size: 30px;
+        }
+
+        ul>li.active {
+            background: orange;
+        }
+
+        ol {
+            width: 100%;
+            flex: 1;
+            position: relative;
+        }
+
+        ol>li {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: skyblue;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 100px;
+        }
+
+        ol>li.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ol>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ol>
+    </div>
+    <div id="box1">
+        <ul>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <ol>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ol>
+    </div>
+    <script src="./index.js"></script>
+    <script>
+        const p1 = new Tabs('box')
+        p1.change()
+        const p2 = new Tabs('box1')
+        p2.change()
+    </script>
+
+</body>
+
+</html>

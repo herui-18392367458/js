@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>99乘法表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        span {
+            display: inline-block;
+            width: 85px;
+            height: 20px;
+            border: 1px solid pink;
+            line-height: 20px;
+            text-align: left;
+            padding-left: 15px;
+        }
+
+        span:hover {
+            background: #ccc;
+            color: #ff6700;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        for (var i = 1; i <= 9; i++) {
+            for (var j = 1; j <= i; j++) {
+                document.write('<span>' + j + '*' + i + '=' + i * j + '&nbsp;&nbsp;</span>')
+            }
+            document.write('<br>')
+        }
+    </script>
+</body>
+
+</html>

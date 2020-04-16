@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试运动函数</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script src="./untils.js"></script>
+    <script>
+        var box = document.querySelector('div')
+        box.onclick = function () {
+            move(box, { left: 100, top: 200 }, () => {
+                console.log('aaa')
+            })
+        }
+    </script>
+</body>
+
+</html>

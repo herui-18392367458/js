@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            border: 5px solid #000;
+        }
+
+        ul {
+            width: 100%;
+            height: 80px;
+            display: flex;
+        }
+
+        ul>li {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            background: green;
+            color: #fff;
+        }
+
+        ul>li.active {
+            background: orange;
+        }
+
+        ol {
+            width: 100%;
+            flex: 1;
+            position: relative;
+        }
+
+        ol>li {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: #fff;
+            display: none;
+        }
+
+        ol>li.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ol>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ol>
+    </div>
+</body>
+<script>
+    var btns = document.querySelectorAll('ul>li')
+    var tabs = document.querySelectorAll('ol>li')
+    btns.forEach(function (item, index) {
+        item.setAttribute('index', index)
+        item.addEventListener('click', function () {
+            btns.forEach(function (item, index) {
+                item.className = '';
+                tabs[index].className = '';
+            })
+            this.className = 'active';
+            tabs[this.getAttribute('index')].className = 'active';
+        })
+    })
+</script>
+
+</html>

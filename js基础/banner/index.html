@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+
+        .clearfixed:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        #box {
+            width: 600px;
+            height: 400px;
+            border: 10px solid #000;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #box>ul {
+            width: 500%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+
+        }
+
+        #box>ul>li {
+            width: 600px;
+            height: 100%;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 100px;
+        }
+
+        #box>ol {
+            width: 200px;
+            height: 30px;
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, .4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        #box>ol>li {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 20px;
+        }
+
+        #box>ol>li.active {
+            background: purple;
+        }
+
+        .leftRight {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .leftRight>span {
+            width: 20px;
+            height: 100%;
+            font-size: 20px;
+            background: rgba(0, 0, 0, .4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul class="clearfixed">
+            <li style="background: red;">1</li>
+            <li style="background: green;">2</li>
+            <li style="background: yellow;">3</li>
+            <li style="background: pink;">4</li>
+            <li style="background: cyan;">5</li>
+        </ul>
+        <ol>
+            <!-- <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li> -->
+        </ol>
+        <div class="leftRight">
+            <span class="left">&lt;</span>
+            <span class="right">&gt;</span>
+        </div>
+    </div>
+    <script src="./utils.js"></script>
+    <script src="./index.js"></script>
+    <script>
+        let B = new Banner('#box')
+        console.log(B)
+    </script>
+</body>
+
+</html>

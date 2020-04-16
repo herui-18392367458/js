@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>格式化年月日</title>
+</head>
+
+<body>
+    <script>
+        function getYear(year) {
+            var a = parseInt(year / 1000)
+            var b = parseInt(year % 1000 / 100)
+            var c = parseInt(year % 100 / 10)
+            var d = parseInt(year % 10)
+            return arr[a] + arr[b] + arr[c] + arr[d] + '年'
+        }
+        function getNumber(num) {
+            //几 十几  几十几 几十
+            if (num <= 10) {
+                return arr[num]
+            }
+            else if (num < 20) {
+                return '十' + arr[num % 10]
+            } else if (num % 10 === 0) {
+                return arr[num / 10] + '十'
+            } else {
+                return arr[parseInt(num / 10)] + '十' + arr[num % 10]
+            }
+        }
+        function getAllTime(time) {
+            var str = ''
+            var year = time.getFullYear()
+            var month = time.getMonth() + 1
+            var date = time.getDate()
+            var hours = time.getHours()
+            var minutes = time.getMinutes()
+            var seconds = time.getSeconds()
+            var day = time.getDay()
+            //组装年
+            str += getYear(year)
+            //组装yue
+            str += getNumber(month) + '月'
+            //组装日
+            str += getNumber(date) + '日 '
+            //组装小时
+            if (hours <= 12) {
+                str += '上午'
+                str += getNumber(hours) + '时'
+            } else if (hours > 12) {
+                str += '下午'
+                str += getNumber(hours % 12) + '时'
+            }
+            //组装分钟
+            str += getNumber(minutes) + '分'
+            //组装秒
+            str += getNumber(seconds) + '秒'
+            if (day === 0) {
+                str += ' 周日'
+            } else {
+                str += ' 周' + arr[day]
+            }
+            return str
+        }
+        var time = new Date()
+        var arr = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十']
+        var res = getAllTime(time)
+        console.log(res)
+    </script>
+</body>
+
+</html>

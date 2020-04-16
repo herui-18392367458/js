@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var div = document.querySelector('div')
+        function moveHandler(e) {
+            e = e || window.event;
+            var x = e.clientX - 100;
+            var y = e.clientY - 100;
+            var box_w = div.offsetWidth;
+            var box_h = div.offsetHeight;
+            var width = document.documentElement.clientWidth;
+            var height = document.documentElement.clientHeight
+            if (x <= 0) {
+                div.style.left = 0
+            } else {
+                div.style.left = x + 'px';
+            }
+            if (y <= 0) {
+                div.style.top = 0
+            } else {
+                div.style.top = y + 'px'
+            }
+            if (x >= (width - box_w)) {
+                div.style.left = (width - box_w) + 'px'
+            } if (y >= (height - box_h)) {
+                div.style.top = (height - box_h) + 'px'
+            }
+        }
+        div.addEventListener('mousedown', function () {
+            div.addEventListener('mousemove', moveHandler)
+        })
+        div.addEventListener('mouseup', function () {
+            div.removeEventListener('mousemove', moveHandler)
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        function fn(time1, time2) {
+            var str = ''
+            var t1 = time1.getTime()
+            var t2 = time2.getTime()
+            var t = parseInt(Math.abs(t1 - t2) / 1000)
+            var days = parseInt(t / (60 * 60 * 24))
+            var hours = parseInt((t - days * 60 * 60 * 24) / 3600)
+            var minutes = parseInt((t - days * 60 * 60 * 24 - hours * 60 * 60) / 60)
+            var seconds = parseInt(t % 60)
+            return str += days + '天' + hours + '小时' + minutes + '分钟' + seconds + '秒钟'
+        }
+        var time2 = new Date('2020-5-20 20:20:20')
+        setInterval(() => {
+            var time1 = new Date()
+            var res = fn(time1, time2)
+            box.innerText = res
+            console.log(res)
+        }, 1000)
+
+    </script>
+</body>
+
+</html>
